@@ -1,0 +1,19 @@
+.navbar-custom{
+    color: #FFF;
+    font-weight: 800;
+    font-size: larger;
+    text-decoration: none;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.nav-link{
+    font-weight: 600;
+    font-size: large;
+}
+
+.nav-link:hover{
+    font-weight: 700;
+    font-size: larger;
+    transition: 0.5s;
+}
