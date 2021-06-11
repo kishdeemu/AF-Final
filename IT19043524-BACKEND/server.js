@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const roomRoutes = require("./routes/rooms-routes");
 const categoryRoutes = require("./routes/categories-routes");
+const calculationRoutes = require("./routes/calculation-routes");
 
 mongoose.connect(
     'mongodb+srv://kishen:kishen1234@kishencluster.jfmbn.mongodb.net/af-2021-IT19043524?retryWrites=true&w=majority'
@@ -18,8 +19,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+//Main routes goes here
 app.use('/rooms', roomRoutes);
 app.use('/categories', categoryRoutes);
+app.use('/calculations', calculationRoutes);
 
 
 app.listen(5000, () => {

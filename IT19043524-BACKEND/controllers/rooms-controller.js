@@ -1,5 +1,7 @@
+//Imports the mongoose model
 const Room = require("../models/Room");
 
+//Add room data
 const addRoom = async (req, res, next) => {
     const createRoom = new Room({
         code: req.body.code,
@@ -9,40 +11,32 @@ const addRoom = async (req, res, next) => {
         categories: req.body.categories
     });
     try{
-        await createRoom.save();
+        await createRoom.save(); //Saves room data to DB
         console.log("Data saved successfully");
     }catch(err){
         console.log("Failed to save data");
     }
+    //Sends response to the frontend
     res.status(200).json({
         createRoom: createRoom
     });
 }
 
+//Get all room details from DB
 const getRooms = async(req, res, next) => {
     let room;
     try{
-        room = await Room.find();
+        room = await Room.find().populate('categories', "name");//populates category details into room details
         console.log("Data retrived successfully!");
     }catch(err){
         console.log("Failed to get data");
     }
+    //Sends response to the frontend
     res.status(200).json({
         room: room
     })
 }
 
-const getRoomByCategory = async (req, res, next) => {
-    let id = req.params.id;
-    let room;
-    try{
-        room = await Room.findById(id).populate('categories');
-        console.log(room)
-    }catch(err){
-        console.log(err);
-    }
-}
-
+//exports the function so it can be used by other files.
 exports.addRoom = addRoom;
 exports.getRooms = getRooms;
-exports.getRoomByCategory = getRoomByCategory;
